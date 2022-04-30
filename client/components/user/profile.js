@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import Router from "next/router";
 import tableStyles from '../common/styles/table.module.css'
-export default function  UserProfilePage(){
+export default function  ProfilePage({}){
     const [profile, setProfile] =useState({})
     useEffect(() => {
         const loginUser = localStorage.getItem("loginUser")
