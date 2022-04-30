@@ -29,7 +29,7 @@ function* signup(action){
         console.log(" **** 여기가 핵심 *** "+JSON.stringify(action))
         const response = yield call(registerAPI, action.payload)
         console.log(" 회원가입 서버다녀옴: " + JSON.stringify(response.data))
-        const result = response.data.result
+        const result = response.data.ok
         if(result === 'ok'){
             yield put({type: REGISTER_SUCCESS, payload: response.data})
             yield put((window.location.href = "/auth/login"));

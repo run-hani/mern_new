@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import axios from 'axios'
 import {SERVER, headers} from "@/modules/auth/server"
+import { useRouter } from "next/router";
 
 // 상태 초기값
 export const initialState = {
@@ -37,6 +38,8 @@ function* signin(action){
     try{
         const response = yield call(loginAPI, action.payload)
         const result = response.data
+        console.log("로그인 결과: ", JSON.stringify(result))
+
         yield put({type: LOGIN_SUCCESS, payload: result})
         yield put({type: SAVE_TOKEN, payload: result.token})
         yield put(window.location.href = "/user/profile")
@@ -57,6 +60,7 @@ function* logout(){
 }
 
 // API
+const loginAPI = payload => axios.post(`${SERVER}/user/login`,payload,{headers})
 const logoutAPI = () => axios.post(`${SERVER}/user/logout`, {}, {headers})
 
 // 리듀서
