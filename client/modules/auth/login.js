@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import axios from 'axios'
 import {SERVER, headers} from "@/modules/auth/server"
-import { useRouter } from "next/router";
 
 // 상태 초기값
 export const initialState = {
@@ -42,7 +41,8 @@ function* signin(action){
 
         yield put({type: LOGIN_SUCCESS, payload: result})
         yield put({type: SAVE_TOKEN, payload: result.token})
-        yield put(window.location.href = "/user/profile")
+        // yield put(window.location.href = "/user/profile") 새로고침 작용으로 상태값 초기화
+        // 아직 쿠키, 세션처리가 되지 않아서 값이 소실된다
     }catch(error){
         yield put({type: LOGIN_FAILURE, payload: error.message})
     }

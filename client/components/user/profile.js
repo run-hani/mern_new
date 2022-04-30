@@ -51,7 +51,7 @@ export function Profile({loginUser}) {
                         <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        프로필 {loginUser.name}
+                    {loginUser.name} 프로필
                     </Typography>
                     <Box
                         component="form"
